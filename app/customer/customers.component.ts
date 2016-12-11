@@ -1,22 +1,20 @@
 import { Component, Input, OnInit } from '@angular/core';
 
+import { CustomerService } from './customer.service';
+
 @Component({
   moduleId: module.id,
   selector: 'app-customers',
   templateUrl: './customers.component.html',
-  styleUrls: ['./customers.component.css']
+  styleUrls: ['./customers.component.css'],
+  providers: [CustomerService]
 })
 export class CustomersComponent implements OnInit {
-  customers = [
-    { id: 1, name: 'Ward' },
-    { id: 2, name: 'Kevin' },
-    { id: 3, name: 'Eric' },
-    { id: 4, name: 'Sally' },
-    { id: 5, name: 'Emmet' },
-  ];
-  constructor() { }
+  customers: any;
+  constructor(private customerService: CustomerService) { }
 
   ngOnInit() {
+    this.customers = this.customerService.getCustomers();
   }
 
 }
