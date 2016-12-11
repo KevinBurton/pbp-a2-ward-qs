@@ -1,18 +1,27 @@
-import { Injectable } from '@angular/core'
-
+import { Injectable } from '@angular/core';
+import { Http, Response } from '@angular/http'
+import { Observable } from 'rxjs/Rx'
+import 'rxjs/add/operator/map';
+const URL_CUSTOMERS = 'app/customers.json'
 @Injectable()
 export class CustomerService {
-    constructor() {
 
-    }
-
-    getCustomers() {
-        return [
-            { id: 1, name: 'Ward' },
-            { id: 2, name: 'Kevin' },
-            { id: 3, name: 'Eric' },
-            { id: 4, name: 'Sally' },
-            { id: 5, name: 'Emmet' },
-        ];
-    }
+  constructor(private _http: Http) { }
+  getCustomers() {
+    // return this._http.get(URL_CUSTOMERS)
+    //   .map((response: Response) => response.json())
+    //   .toPromise()
+    //   .catch((err: any) => {
+    //     console.log(err); // again, customize me please
+    //     return Promise.reject(err);
+    //   });
+    // Alternate:
+    return this._http.get(URL_CUSTOMERS)
+      .map((response: Response) => response.json())
+      .catch(this._handlerError);
+  }
+  _handlerError(err: any) {
+    console.log(err); // log this somewhere and format the message well for devs
+    return Observable.throw(err); // our opportunity customize this error
+  }
 }
