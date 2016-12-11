@@ -6,8 +6,7 @@ import { CustomerService } from './customer.service';
   moduleId: module.id,
   selector: 'app-customers',
   templateUrl: './customers.component.html',
-  styleUrls: ['./customers.component.css'],
-  providers: [CustomerService]
+  styleUrls: ['./customers.component.css']
 })
 export class CustomersComponent implements OnInit {
   customers: any;
